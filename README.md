@@ -1,1 +1,1 @@
-personal notes & scripts & protocols, most for internal use
+personal files & notes & scripts & protocols, mostly for internal use

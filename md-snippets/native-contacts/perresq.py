@@ -435,8 +435,8 @@ def main(argv=None):
             terms as a check."""),
         epilog=textwrap.dedent("""\
             examples:
-              python qres.py -f md.xtc -s md.gro -o wt363
-              python qres.py -f p1.xtc p2.xtc -s md.tpr --stride 10 -o wt363 --plot
+              python qres.py -f md.xtc -s md.gro -o output
+              python qres.py -f p1.xtc p2.xtc -s md.tpr --stride 10 -o output --plot
               python qres.py --selftest
 
             notes:

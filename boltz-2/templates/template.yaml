@@ -1,0 +1,31 @@
+version: 1  # input format version
+
+sequences:
+  - protein:
+      id: [A]  # protein chain ID(s): [A] = monomer, [A, B] = two identical copies (homodimer)
+      sequence: GSHMHYSYETFLKDSLELVKQVEQICGVPEALVCVMRGGMTLTHFLSLHWDLREVYGINAISYDTTHRQNALKIENIPTIKDHLKTILVVDEIVDSGNSLEAVLKVLQDKHPDKKFYSASLFQKTSAKYKADAFLKDAPEWIDFFWEVDLKNLKSH  # protein sequence, on ONE line
+  - ligand:
+      id: B  # ligand chain ID (must differ from the protein IDs)
+      smiles: 'C1=CC=CC=C1'  # ligand SMILES (alternatively: ccd: <PDB CCD code>)
+
+constraints:  # OPTIONAL: binding-site residues (pocket-guided prediction)
+  - pocket:
+      binder: B  # chain that binds in the pocket (the ligand)
+      # Residue numbers = POSITIONS in the sequence above, starting at 1 (not PDB numbering).
+      # PDB numbering + 3 here, because the sequence starts with the 3-residue tag GSH before Met1.
+      contacts: [
+        [A, 37], [A, 38],  # residues binding pyrophosphate (PPi)            (PDB 34, 35)
+        [A, 95], [A, 96], [A, 97], [A, 98],  # residues binding the phosphate group   (PDB 92-95)
+        [A, 124], [A, 141], [A, 142], [A, 143], [A, 147]  # residues binding the 6-oxopurine base (PDB 121, 138-140, 144)
+      ]
+      max_distance: 5.0  # max distance (Å) between the ligand and each contact residue (allowed 4-20, default 6)
+      force: true  # use a potential to keep the ligand in the pocket
+
+templates:  # OPTIONAL: experimental structure used as a template (protein chains only)
+  - cif: ./template.cif  # mmCIF file (e.g. from the PDB); use `pdb:` for .pdb files. Path is relative to where you run boltz
+    chain_id: A  # chain in THIS file to template (must be a protein chain)
+    template_id: A  # chain in the TEMPLATE file to use
+
+properties:  # OPTIONAL: affinity is the only property Boltz-2 computes
+  - affinity:
+      binder: B  # ligand chain for which the binding affinity is predicted

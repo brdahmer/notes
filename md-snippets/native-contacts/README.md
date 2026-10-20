@@ -13,3 +13,6 @@ For each frame, the contact list was traversed once and each fij accumulated int
 For each residue a, qa is the mean of this function over the subset of native contacts in which the residue participates, 
 normalized by its own native contact count. Intra-residue contacts were naturally excluded by the  | θi-θj | > 3 criterion, 
 so global Q can be recovered as a contact-count-weighted mean of qa as means of validation.
+
+**Usage**
+    python perresq.py -f md.xtc -s md.gro -o output_name

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 qres.py -- per-residue fraction of native contacts, q_i(t), from an MD trajectory.
-
+"""
 from __future__ import annotations
 
 import argparse
